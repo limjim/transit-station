@@ -15,4 +15,8 @@ class TransitStationServiceProvider extends ServiceProvider
     {
         include __DIR__ . '/routes.php';
     }
+
+    public function register() {
+        
+    }
 }
