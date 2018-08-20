@@ -1,4 +1,6 @@
 <?php
-Route::post('service/site/send-request', [
-    'as' => 'service::site::send::request', 'uses' => 'Megaads\TransitStation\Controllers\TransformerController@sendRequest'
-]);
+Route::group(['prefix' => 'transformer', 'namespace' => '\Megaads\TransitStation\Controllers'], function(){
+    Route::any('site/send-request', [
+        'as' => 'tranformer::site::send::request', 'uses' => 'TransformerController@sendRequest'
+    ]);
+});
