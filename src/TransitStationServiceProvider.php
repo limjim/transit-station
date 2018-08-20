@@ -13,10 +13,12 @@ class TransitStationServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        include __DIR__ . '/routes.php';
+        if (!$this->app->routesAreCached()) {
+            include __DIR__ . '/routes.php';
+        }
     }
 
     public function register() {
-        
+
     }
 }
