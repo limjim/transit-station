@@ -1,8 +1,7 @@
 <?php
 namespace Megaads\TransitStation\Controllers;
 
-use Laravel\Lumen\Routing\Controller;
-
-class BaseController extends Controller {
+use Illuminate\Routing\Controller as BaseController;
+class Controller extends BaseController {
 
 }

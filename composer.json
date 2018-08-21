@@ -15,8 +15,14 @@
         "psr-4": {
             "Megaads\\TransitStation\\": "src/"
         }
-    }
-	,
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Megaads\\TransitStation\\TransitStationServiceProvider"
+            ]
+        }
+    },
     "authors": [
         {
             "name": "Megaads",
