@@ -19,6 +19,6 @@ class TransitStationServiceProvider extends ServiceProvider
     }
 
     public function register() {
-        $this->app->register(\Megaads\TransitStation\TransitStationServiceProvider::class);
+        
     }
 }
