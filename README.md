@@ -1,10 +1,6 @@
 # Transit Station Service
 
 ##Installation:
-```javascript
-composer require megaaads/transit-station
-```
-###OR
 **add in file composer.json**
 ```javascript
 "require": {
