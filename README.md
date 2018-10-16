@@ -4,7 +4,7 @@
 **add in file composer.json**
 ```javascript
 "require": {
-	"megaads/transit-station": "dev-master"
+	"megaads/transit-station": "^1.0"
 }
 ```
 ##Usage:
