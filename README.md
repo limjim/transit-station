@@ -18,5 +18,5 @@
 
 **Router for transfer both GET or POST**
 ```
-http://domain/proxy/transferring
+http://domain/proxy/transferring/request
 ```
