@@ -1,13 +1,13 @@
 # Transit Station Service
 
-##Installation:
+## Installation:
 **add in file composer.json**
 ```javascript
 "require": {
 	"megaads/transit-station": "^1.0"
 }
 ```
-##Usage:
+## Usage:
 **Register Provider**
 ```
 #/Config/app.php
