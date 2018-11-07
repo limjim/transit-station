@@ -8,6 +8,7 @@ use Megaads\TransitStation\Controllers\Controller;
 class TransformerController extends Controller {
 
     public function transferringRequest(Request $request) {
+        ini_set('memory_limit', '1024M');
         $response = [
             'status' => 'fail',
             'message' => 'Request failed.'
@@ -22,36 +23,46 @@ class TransformerController extends Controller {
             $param = http_build_query($param);
         }
         if ($header && !is_array($header)) {
-            $header = json_decode($header);
+            $header = json_decode($header, true);
         }
+        if( $request->input('debug') ) {
+            return \Response::json([
+                $header,$url
+            ]);
+        }
+
         if ($url) {
             try {
                 $ch = curl_init();
-                $timeout = 30;
+
                 curl_setopt($ch, CURLOPT_URL, $url);
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-                if ($method == 'POST' || $method == 'post') {
-                    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
-                }
-                if($header){
-                    curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-                }
-                if ($param) {
-                    curl_setopt($ch, CURLOPT_POSTFIELDS, $param);
-                }
-                curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
-                $result = curl_exec($ch);
+                curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+                curl_setopt($ch, CURLOPT_HEADER, 0);
+                $returnResult = curl_exec($ch);
                 curl_close($ch);
-                return $result;
+
+                libxml_use_internal_errors(true);
+                $doc = simplexml_load_string($returnResult);
+                if (!$doc) {
+                    throw new \Exception($returnResult);
+                }
+                $xml = new SimpleXMLElement($returnResult);
+                $result = [];
+                if (isset($xml->activitydetailsreportrecord)) {
+                    foreach ($xml->activitydetailsreportrecord as $value) {
+                        $result[] = (array) $value;
+
+                    }
+                }
+                $response['result'] = $result;
             } catch(\Exception $ex) {
                 $response['message'] .= $ex->getMessage();
-                return response()->json($response);
             }
-
         } else {
             $response['message'] .= ' Url is required.';
-            return response()->json($response);
         }
+        return \Response::json($response);
 
     }
 }
