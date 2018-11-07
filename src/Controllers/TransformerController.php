@@ -4,6 +4,7 @@ namespace Megaads\TransitStation\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Megaads\TransitStation\Controllers\Controller;
+use SimpleXMLElement;
 
 class TransformerController extends Controller {
 
